@@ -110,10 +110,8 @@ public class MainActivity extends AppCompatActivity {
         if(TempPassword.equalsIgnoreCase(PasswordHolder)) {
             Toast.makeText(MainActivity.this,"Login Successful", Toast.LENGTH_LONG).show();
 
-            // Going to Dashboard activity after login success message.
             Intent intent = new Intent(MainActivity.this, DiaryActivity.class);
 
-            // Sending Email to Dashboard Activity using intent.
             startActivity(intent);
         }
         else {

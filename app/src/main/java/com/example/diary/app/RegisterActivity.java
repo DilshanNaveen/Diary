@@ -1,6 +1,7 @@
 package com.example.diary.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -53,10 +54,8 @@ public class RegisterActivity extends AppCompatActivity {
                 // Method to check Email is already exists or not.
                 CheckingEmailAlreadyExistsOrNot();
 
-                // Empty EditText After done inserting process.
-                EmptyEditTextAfterDataInsert();
-
-
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -103,17 +102,6 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this,"Please Fill All The Required Fields.", Toast.LENGTH_LONG).show();
 
         }
-
-    }
-
-    // Empty edittext after done inserting process method.
-    public void EmptyEditTextAfterDataInsert(){
-
-        Name.getText().clear();
-
-        Email.getText().clear();
-
-        Password.getText().clear();
 
     }
 
