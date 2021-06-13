@@ -71,7 +71,7 @@ public class UpdateActivity extends AppCompatActivity {
                 Date date = new Date();
                 String d = (String) android.text.format.DateFormat.format("dd/MM/yyyy  hh:mm:ss",date);
 
-                if(dbUpdate.update(subjectEt.getText().toString(),descriptionEt.getText().toString(),d,id)==true){
+                if(dbUpdate.update(subjectEt.getText().toString(),descriptionEt.getText().toString(),d,id, MainActivity.USER_ID)==true){
                     Toast.makeText(getApplicationContext(),"Data updated",Toast.LENGTH_SHORT).show();
                     backToMain();
                 }

@@ -51,13 +51,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     //function for inserting on sqlite database
-    public long insertData(String subject, String description, String dateTime) {
+    public long insertData(String subject, String description, String dateTime, int userId) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();//for accessing database data
         ContentValues contentValues = new ContentValues();
         contentValues.put(DIARY_COL_2,subject);
         contentValues.put(DIARY_COL_3, description);
         contentValues.put(DIARY_COL_4, dateTime);
-        contentValues.put(DIARY_COL_5, 1);
+        contentValues.put(DIARY_COL_5, userId);
         long id = sqLiteDatabase.insert(DIARY, null, contentValues);
         return id;
     }
@@ -67,7 +67,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return cursor;
     }
     //for updating database data
-    public boolean update(String subject,String description,String dateTime,String id){
+    public boolean update(String subject,String description,String dateTime,String id, int userId){
         try{
             SQLiteDatabase sqliteDatabase = this.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
@@ -75,7 +75,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             contentValues.put(DIARY_COL_2,subject);
             contentValues.put(DIARY_COL_3, description);
             contentValues.put(DIARY_COL_4, dateTime);
-            contentValues.put(DIARY_COL_5, 1);
+            contentValues.put(DIARY_COL_5, userId);
             sqliteDatabase.update(DIARY,contentValues, DIARY_COL_1 +" =?", new String[]{id});
             return true;
         }

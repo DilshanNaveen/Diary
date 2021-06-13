@@ -27,13 +27,11 @@ import java.util.Collections;
 
 public class DiaryActivity extends AppCompatActivity {
 
-    Integer userId;
     ListView listView;
     SQLiteHelper db;
     ArrayList<Information> arrayList;
     ArrayList<String> selectList = new ArrayList<String>();
     ArrayList<Integer> unDeleteSelect = new ArrayList<Integer>();
-
     ArrayAdapter arrayAdapter;
 
     int count = 0;
@@ -51,9 +49,6 @@ public class DiaryActivity extends AppCompatActivity {
         listView = findViewById(R.id.ListviewId);
 
         arrayList = new ArrayList<Information>();
-
-        Intent intent = getIntent();
-        userId = intent.getIntExtra(MainActivity.USER_ID, 0);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -110,9 +105,11 @@ public class DiaryActivity extends AppCompatActivity {
     public void view() {
         Cursor cursor = db.display();
         while (cursor.moveToNext()) {
-            Information information = new Information(cursor.getString(0), cursor.getString(1),
-                    cursor.getString(2), cursor.getString(3));
-            arrayList.add(information);
+            if (cursor.getInt(4) == MainActivity.USER_ID){
+                Information information = new Information(cursor.getString(0), cursor.getString(1),
+                        cursor.getString(2), cursor.getString(3));
+                arrayList.add(information);
+            }
         }
         Collections.reverse(arrayList);//reversing arrayList for showing data in a proper way
 

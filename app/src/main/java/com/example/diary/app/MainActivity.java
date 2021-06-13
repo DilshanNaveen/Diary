@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     SQLiteHelper sqLiteHelper;
     Cursor cursor;
     String TempPassword = "NOT_FOUND" ;
-    public static final String USER_ID = "com.example.diary.app.USER_ID";
+    public static int USER_ID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,13 +75,13 @@ public class MainActivity extends AppCompatActivity {
                     cursor.moveToFirst();
                     // Storing Password associated with entered email.
                     TempPassword = cursor.getString(cursor.getColumnIndex(SQLiteHelper.Table_Column_3_Password));
-                    userId = cursor.getInt(cursor.getColumnIndex(SQLiteHelper.Table_Column_ID));
+                    USER_ID = cursor.getInt(cursor.getColumnIndex(SQLiteHelper.Table_Column_ID));
                     // Closing cursor.
                     cursor.close();
                 }
             }
             // Calling method to check final result ..
-            CheckFinalResult(userId);
+            CheckFinalResult();
 
         }
         else {
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Checking entered password from SQLite database email associated password.
-    public void CheckFinalResult(int userId){
+    public void CheckFinalResult(){
         if(TempPassword.equalsIgnoreCase(PasswordHolder)) {
             Toast.makeText(MainActivity.this,"Login Successful", Toast.LENGTH_LONG).show();
 
@@ -114,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, DiaryActivity.class);
 
             // Sending Email to Dashboard Activity using intent.
-            intent.putExtra(USER_ID, userId);
             startActivity(intent);
         }
         else {

@@ -75,7 +75,7 @@ public class AddDataActivity extends AppCompatActivity {
         else{
             l = mydb.insertData(subjectEt.getText().toString(),
                     descriptionEt.getText().toString(),
-                    d);
+                    d, MainActivity.USER_ID);
         }
 
         if(l>=0){
