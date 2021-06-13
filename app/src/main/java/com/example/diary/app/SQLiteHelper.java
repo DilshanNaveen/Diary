@@ -89,4 +89,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         sqliteDatabase.delete(DIARY, DIARY_COL_1 +" = ?",new String[]{id});
         return  true;
     }
+
+
 }

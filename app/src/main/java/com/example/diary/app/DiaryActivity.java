@@ -1,13 +1,11 @@
 package com.example.diary.app;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ActionMode;
@@ -23,12 +21,13 @@ import android.widget.Toast;
 
 import com.example.diary.app.model.Information;
 import com.example.diary.app.model.InformationAdapter;
-import com.example.diary.app.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class DiaryActivity extends AppCompatActivity {
+
+    Integer userId;
     ListView listView;
     SQLiteHelper db;
     ArrayList<Information> arrayList;
@@ -52,6 +51,9 @@ public class DiaryActivity extends AppCompatActivity {
         listView = findViewById(R.id.ListviewId);
 
         arrayList = new ArrayList<Information>();
+
+        Intent intent = getIntent();
+        userId = intent.getIntExtra(MainActivity.USER_ID, 0);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
