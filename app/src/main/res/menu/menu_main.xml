@@ -4,13 +4,6 @@
     tools:context="com.example.diary.app.DiaryActivity">
 
     <item
-        android:id="@+id/aboutIdMainActivity"
-        android:orderInCategory="100"
-        android:title="Instructions"
-        app:showAsAction="never"
-        />
-
-    <item
         android:id="@+id/logoutIdMainActivity"
         android:orderInCategory="100"
         android:title="Logout"

@@ -85,9 +85,6 @@ public class DiaryActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.aboutIdMainActivity:
-                about();
-                return true;
             case R.id.logoutIdMainActivity:
                 finish();
                 Toast.makeText(DiaryActivity.this,"Log Out Successful", Toast.LENGTH_LONG).show();
@@ -184,10 +181,5 @@ public class DiaryActivity extends AppCompatActivity {
                 selectList.clear();
             }
         });
-    }
-
-    public void about() {
-        Intent intent = new Intent(this, InstructionActivity.class);
-        startActivity(intent);
     }
 }

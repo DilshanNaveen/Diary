@@ -25,11 +25,6 @@
         <activity android:name="com.example.diary.app.UpdateActivity" />
         <activity android:name="com.example.diary.app.DiaryActivity" />
         <activity android:name="com.example.diary.app.RegisterActivity" />
-        <activity android:name="com.example.diary.app.DashboardActivity"/>
-        <activity
-            android:name="com.example.diary.app.InstructionActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
     </application>
 
 </manifest>
