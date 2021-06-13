@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class AddDataActivity extends AppCompatActivity {
     EditText subjectEt,descriptionEt;
-    Button cancelBt,saveBt,shareBt;
+    Button cancelBt,saveBt;
     SQLiteHelper mydb;
 
     @Override
@@ -29,21 +29,6 @@ public class AddDataActivity extends AppCompatActivity {
 
         cancelBt = findViewById(R.id.cacelButtonId);
         saveBt = findViewById(R.id.saveButtonId);
-        shareBt = findViewById(R.id.shareButtonId);
-
-        shareBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //passing data via intent
-                Intent shareIntent =   new Intent(android.content.Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                String sub = subjectEt.getText().toString();
-                shareIntent.putExtra(Intent.EXTRA_SUBJECT,sub);
-                String des = descriptionEt.getText().toString();
-                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,des);
-                startActivity(Intent.createChooser(shareIntent, "Share via"));
-            }
-        });
 
         saveBt.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -11,15 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="right">
-
-        <Button
-            android:id="@+id/shareButtonIdUpdate"
-            android:layout_width="42dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="2dp"
-            android:background="#00000000"
-            android:drawableLeft="@drawable/share"
-            android:drawableStart="@drawable/share" />
+        
         <Button
             android:id="@+id/cacelButtonIdUpdate"
             android:layout_width="wrap_content"

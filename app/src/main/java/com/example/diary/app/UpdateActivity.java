@@ -15,7 +15,7 @@ import java.util.Date;
 
 public class UpdateActivity extends AppCompatActivity {
     EditText subjectEt,descriptionEt;
-    Button cancelBt,updateBt,shareBtOnUpdate;
+    Button cancelBt,updateBt;
     SQLiteHelper dbUpdate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,6 @@ public class UpdateActivity extends AppCompatActivity {
 
         cancelBt = findViewById(R.id.cacelButtonIdUpdate);
         updateBt = findViewById(R.id.saveButtonIdUpdate);
-        shareBtOnUpdate = findViewById(R.id.shareButtonIdUpdate);
 
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
@@ -42,20 +41,6 @@ public class UpdateActivity extends AppCompatActivity {
 
         subjectEt.setText(sub);
         descriptionEt.setText(des);
-
-        //for sharing data to social media
-        shareBtOnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent shareIntent =   new Intent(android.content.Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                String sub = subjectEt.getText().toString();
-                shareIntent.putExtra(Intent.EXTRA_SUBJECT,sub);
-                String des = descriptionEt.getText().toString();
-                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,des);
-                startActivity(Intent.createChooser(shareIntent, "Share via"));
-            }
-        });
 
         cancelBt.setOnClickListener(new View.OnClickListener() {
             @Override
