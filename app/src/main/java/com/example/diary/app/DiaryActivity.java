@@ -91,6 +91,10 @@ public class DiaryActivity extends AppCompatActivity {
             case R.id.aboutIdMainActivity:
                 about();
                 return true;
+            case R.id.logoutIdMainActivity:
+                finish();
+                Toast.makeText(DiaryActivity.this,"Log Out Successful", Toast.LENGTH_LONG).show();
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

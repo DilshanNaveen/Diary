@@ -9,4 +9,12 @@
         android:title="Instructions"
         app:showAsAction="never"
         />
+
+    <item
+        android:id="@+id/logoutIdMainActivity"
+        android:orderInCategory="100"
+        android:title="Logout"
+        app:showAsAction="never"
+        />
 </menu>
+
