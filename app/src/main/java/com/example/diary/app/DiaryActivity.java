@@ -1,11 +1,13 @@
 package com.example.diary.app;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ActionMode;
@@ -49,16 +51,16 @@ public class DiaryActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.ListviewId);
 
-        arrayList=new ArrayList<Information>();
+        arrayList = new ArrayList<Information>();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-       // ClickListener for floating action bar
+        // ClickListener for floating action bar
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intent = new Intent(DiaryActivity.this,AddDataActivity.class);
-               startActivity(intent);
+                Intent intent = new Intent(DiaryActivity.this, AddDataActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -67,10 +69,10 @@ public class DiaryActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(DiaryActivity.this,UpdateActivity.class);
-                intent.putExtra("subject",arrayList.get(i).getSubject());
-                intent.putExtra("description",arrayList.get(i).getDescription());
-                intent.putExtra("listId",arrayList.get(i).getId());
+                Intent intent = new Intent(DiaryActivity.this, UpdateActivity.class);
+                intent.putExtra("subject", arrayList.get(i).getSubject());
+                intent.putExtra("description", arrayList.get(i).getDescription());
+                intent.putExtra("listId", arrayList.get(i).getId());
                 startActivity(intent);
             }
         });
@@ -96,11 +98,14 @@ public class DiaryActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() { }
+
     public void view() {
         Cursor cursor = db.display();
         while (cursor.moveToNext()) {
-            Information information = new Information(cursor.getString(0),cursor.getString(1),
-                    cursor.getString(2),cursor.getString(3));
+            Information information = new Information(cursor.getString(0), cursor.getString(1),
+                    cursor.getString(2), cursor.getString(3));
             arrayList.add(information);
         }
         Collections.reverse(arrayList);//reversing arrayList for showing data in a proper way
@@ -117,25 +122,25 @@ public class DiaryActivity extends AppCompatActivity {
 
                 String id = arrayList.get(i).getId();//for getting database Id
                 //if double click Item color will be white
-                if(selectList.contains(id) && count>0){
+                if (selectList.contains(id) && count > 0) {
                     listView.getChildAt(i).setBackgroundColor(Color.WHITE);
                     selectList.remove(id);
                     count--;
                 }
                 //else item color will be gray
-                else{
+                else {
                     selectList.add(arrayList.get(i).getId());
                     listView.getChildAt(i).setBackgroundColor(Color.GRAY);
                     unDeleteSelect.add(i);//item position storing on new arrayList
                     count++;
                 }
-                actionMode.setTitle(count+" item selected");
+                actionMode.setTitle(count + " item selected");
             }
 
             @Override
             public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
                 MenuInflater inflater = actionMode.getMenuInflater();//for connecting menu with main menu here
-                inflater.inflate(R.menu.selector_layout,menu);
+                inflater.inflate(R.menu.selector_layout, menu);
                 return true;
             }
 
@@ -148,11 +153,11 @@ public class DiaryActivity extends AppCompatActivity {
             @Override
             public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
 
-                if(menuItem.getItemId() == R.id.deleteContextMenuId){
-                    for(String i : selectList){
+                if (menuItem.getItemId() == R.id.deleteContextMenuId) {
+                    for (String i : selectList) {
                         db.delete(i);
                         arrayAdapter.remove(i);
-                        Toast.makeText(getApplicationContext(),count+" item Deleted",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), count + " item Deleted", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(DiaryActivity.this, DiaryActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         finish();
@@ -168,7 +173,7 @@ public class DiaryActivity extends AppCompatActivity {
             //this method for destroying actionMode
             @Override
             public void onDestroyActionMode(ActionMode actionMode) {
-                for(int i: unDeleteSelect){
+                for (int i : unDeleteSelect) {
                     listView.getChildAt(i).setBackgroundColor(Color.WHITE);//reset all selected item with gray color
                 }
                 count = 0;//reset count here
@@ -177,8 +182,9 @@ public class DiaryActivity extends AppCompatActivity {
             }
         });
     }
-    public void about(){
-        Intent intent = new Intent(this,InstructionActivity.class);
+
+    public void about() {
+        Intent intent = new Intent(this, InstructionActivity.class);
         startActivity(intent);
     }
 }
