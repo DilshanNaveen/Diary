@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.diary.app.R;
-
 import java.util.Date;
 
 public class UpdateActivity extends AppCompatActivity {

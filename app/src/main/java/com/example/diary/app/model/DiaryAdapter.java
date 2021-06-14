@@ -13,11 +13,11 @@ import com.example.diary.app.R;
 
 import java.util.ArrayList;
 
-public class InformationAdapter extends ArrayAdapter<Information> {
+public class DiaryAdapter extends ArrayAdapter<Diary> {
     Context context;
-    ArrayList<Information> ItemList;
+    ArrayList<Diary> ItemList;
 
-    public InformationAdapter(@NonNull Context context, ArrayList<Information> ItemList) {
+    public DiaryAdapter(@NonNull Context context, ArrayList<Diary> ItemList) {
         super(context, 0,ItemList);
         this.context = context;
         this.ItemList = ItemList;
@@ -31,7 +31,7 @@ public class InformationAdapter extends ArrayAdapter<Information> {
             view= LayoutInflater.from(context).inflate(R.layout.listview_shape,parent,false);//for creating view
         }
 
-        Information item = ItemList.get(position);
+        Diary item = ItemList.get(position);
 
         //finding listview shape component
         TextView subject = view.findViewById(R.id.subjectListViewShapeId);

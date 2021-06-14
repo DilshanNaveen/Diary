@@ -1,12 +1,12 @@
 package com.example.diary.app.model;
 
-public class Information {
+public class Diary {
     private String id;
     private String subject;
     private String description;
     private String dateTime;
    // private int IconImage;
-    public Information(String id, String subject, String description, String dateTime) {
+    public Diary(String id, String subject, String description, String dateTime) {
         this.id = id;
         this.subject = subject;
         this.description = description;

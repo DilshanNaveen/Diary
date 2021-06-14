@@ -19,8 +19,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.diary.app.model.Information;
-import com.example.diary.app.model.InformationAdapter;
+import com.example.diary.app.model.Diary;
+import com.example.diary.app.model.DiaryAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +29,7 @@ public class DiaryActivity extends AppCompatActivity {
 
     ListView listView;
     SQLiteHelper db;
-    ArrayList<Information> arrayList;
+    ArrayList<Diary> arrayList;
     ArrayList<String> selectList = new ArrayList<String>();
     ArrayList<Integer> unDeleteSelect = new ArrayList<Integer>();
     ArrayAdapter arrayAdapter;
@@ -48,7 +48,7 @@ public class DiaryActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.ListviewId);
 
-        arrayList = new ArrayList<Information>();
+        arrayList = new ArrayList<Diary>();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -103,14 +103,14 @@ public class DiaryActivity extends AppCompatActivity {
         Cursor cursor = db.display();
         while (cursor.moveToNext()) {
             if (cursor.getInt(4) == MainActivity.USER_ID){
-                Information information = new Information(cursor.getString(0), cursor.getString(1),
+                Diary information = new Diary(cursor.getString(0), cursor.getString(1),
                         cursor.getString(2), cursor.getString(3));
                 arrayList.add(information);
             }
         }
         Collections.reverse(arrayList);//reversing arrayList for showing data in a proper way
 
-        arrayAdapter = new InformationAdapter(this, arrayList);//passing context and arrayList to arrayAdapter
+        arrayAdapter = new DiaryAdapter(this, arrayList);//passing context and arrayList to arrayAdapter
         listView.setAdapter(arrayAdapter);
 
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);//setting choice mode
