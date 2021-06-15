@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ActionMode;
@@ -15,8 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.diary.app.model.Diary;
@@ -25,14 +26,18 @@ import com.example.diary.app.model.DiaryAdapter;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class DiaryActivity extends AppCompatActivity {
+public class
+
+
+
+DiaryActivity extends AppCompatActivity {
 
     ListView listView;
     SQLiteHelper db;
     ArrayList<Diary> arrayList;
     ArrayList<String> selectList = new ArrayList<String>();
     ArrayList<Integer> unDeleteSelect = new ArrayList<Integer>();
-    ArrayAdapter arrayAdapter;
+    DiaryAdapter diaryAdapter;
 
     int count = 0;
 
@@ -78,8 +83,27 @@ public class DiaryActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.search_view);
+
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                diaryAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -89,7 +113,8 @@ public class DiaryActivity extends AppCompatActivity {
                 finish();
                 Toast.makeText(DiaryActivity.this,"Log Out Successful", Toast.LENGTH_LONG).show();
                 return true;
-
+            case R.id.search_view:
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -110,8 +135,8 @@ public class DiaryActivity extends AppCompatActivity {
         }
         Collections.reverse(arrayList);//reversing arrayList for showing data in a proper way
 
-        arrayAdapter = new DiaryAdapter(this, arrayList);//passing context and arrayList to arrayAdapter
-        listView.setAdapter(arrayAdapter);
+        diaryAdapter = new DiaryAdapter(this, arrayList);//passing context and arrayList to arrayAdapter
+        listView.setAdapter(diaryAdapter);
 
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);//setting choice mode
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {//method for multiChoice option
@@ -156,14 +181,13 @@ public class DiaryActivity extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.deleteContextMenuId) {
                     for (String i : selectList) {
                         db.delete(i);
-                        arrayAdapter.remove(i);
                         Toast.makeText(getApplicationContext(), count + " item Deleted", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(DiaryActivity.this, DiaryActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         finish();
                         startActivity(intent);
                     }
-                    arrayAdapter.notifyDataSetChanged();
+                    diaryAdapter.notifyDataSetChanged();
                     actionMode.finish();
                     count = 0;
                 }

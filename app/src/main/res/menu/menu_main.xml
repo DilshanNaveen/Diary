@@ -9,5 +9,12 @@
         android:title="Logout"
         app:showAsAction="never"
         />
+    <item
+        android:id="@+id/search_view"
+        android:title="Search"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_search"
+        app:actionViewClass="android.widget.SearchView"
+        />
 </menu>
 
