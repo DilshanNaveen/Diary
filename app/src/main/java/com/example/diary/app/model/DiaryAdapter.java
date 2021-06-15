@@ -81,7 +81,7 @@ public class DiaryAdapter extends BaseAdapter implements Filterable {
                     String searchStr = constraint.toString().toLowerCase();
 
                     for(Diary itemsModel: ItemList){
-                        if(itemsModel.getSubject().contains(searchStr) || itemsModel.getDateTime().contains(searchStr)){
+                        if(itemsModel.getSubject().contains(searchStr) || itemsModel.getDateTime().contains(searchStr) || itemsModel.getDescription().contains(searchStr)){
                             resultsModel.add(itemsModel);
                             filterResults.count = resultsModel.size();
                             filterResults.values = resultsModel;
